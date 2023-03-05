@@ -31,15 +31,13 @@ public class handeler {
    static Set<String> fetchData(){
        Set<String> st=new HashSet<String>();
 
-       try{
-//           File root = new File(Environment.getExternalStoragePublicDirectory
-//                   (Environment.DIRECTORY_DOCUMENTS),"FinalProjectAttendance");
            File root_class = new File(Environment.getExternalStoragePublicDirectory
                    (Environment.DIRECTORY_DOCUMENTS),"FinalProjectAttendance"+"/"+DirectoryName);
+
            Log.d("numberu",root_class.getAbsolutePath());
 
             filepath = new File(root_class,"DSA"+new SimpleDateFormat("MM_dd_yyyy").format(new Date())+".txt");
-           if(root_class.exists()){
+           if(!root_class.exists())   root_class.mkdirs();
                BufferedReader reader=null;
                try {
                     reader = new BufferedReader(new java.io.FileReader(filepath));
@@ -53,25 +51,6 @@ public class handeler {
                    return st;
                }
 
-            //   reader.
-
-             // st.addAll(Collections.singleton(reader.toString()));
-
-
-           }else{
-              // root.mkdir();
-               root_class.mkdirs();
-               //root_class.
-           }
-
-
-          // FileWriter writer = new FileWriter(filepath);
-           //writer.append(st.size()+"\n"+st.toString());
-
-
-       } catch (Exception e) {
-           throw new RuntimeException(e);
-       }
       return st;
    }
 
@@ -87,29 +66,15 @@ public class handeler {
            Log.d("Time",simpleDateFormat.format(date));
            lastdate=date.getTime();
 
-     //    String filename=  new SimpleDateFormat(pat).format(date);
-          // Log.d("Timea",filename);
            try{
-//               File root = new File(Environment.getExternalStoragePublicDirectory
-//                       (Environment.DIRECTORY_DOCUMENTS),"FinalProjectAttendance/"+DirectoryName);
-//               Log.d("numberu",root.getAbsolutePath());
-//               if(!root.exists()){
-//                   root.mkdir();
-//                   Log.d("numberu","myfile");
-//               }
-            //   File filepath = new File(root,"DSA"+filename+".txt");
+
 
                FileWriter writer = new FileWriter(filepath);
                for(String s:st){
                    writer.append(s).append("\n");
                }
 
-            //   writer.
-//             String[] ar= (String[])  st.toArray();
-//             Log.d("arsize",""+ar.length);
-//             for(String s:ar){
-//                 writer.append(s);
-//             }
+
 
                writer.flush();
            } catch (IOException e) {
